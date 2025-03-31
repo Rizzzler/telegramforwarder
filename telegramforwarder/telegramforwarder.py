@@ -60,4 +60,9 @@ async def start_bot():
     await bot.run_until_disconnected()
 
 if __name__ == "__main__":
-    asyncio.run(start_bot())
+    loop = asyncio.get_event_loop()
+    if loop.is_closed():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    loop.run_until_complete(start_bot())
